@@ -173,3 +173,6 @@ def sales_confirming(browser, wait_time):
     gem_span_btn = WebDriverWait(browser, wait_time).until(
         EC.presence_of_element_located((By.XPATH, consts.XPATH_SPAN_BTN_GEM)))
     gem_span_btn.click()
+
+    WebDriverWait(browser, wait_time + 30).until(
+        EC.element_to_be_clickable((By.XPATH, consts.XPATH_CONFIRM_MESSAGE)))

@@ -76,3 +76,6 @@ XPATH_INPUT_BY = "//div[text()='By*']//following-sibling::input"
 
 # Подтверждение территориальных данных
 XPATH_SPAN_BTN_GEM = "//span[text()='Gem']"
+
+# Уведомление о добавление товара
+XPATH_CONFIRM_MESSAGE = "//span[text()='Vi har opdateret din information. Du kan altid ændre den i dine indstillinger']"
