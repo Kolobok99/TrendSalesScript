@@ -1,7 +1,12 @@
 import traceback
 
 from selenium import webdriver
+from selenium.common import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
+import consts
 import parametrs
 from services import steps
 
@@ -20,9 +25,17 @@ def sales_scrapper(open_browser=True, save_sale=False, tries=1, wait_time=10):
                 browser = webdriver.Chrome()
             browser.get(url=URL)
 
-            steps.accept_cookie(browser,wait_time)
+            steps.accept_cookie(browser, wait_time)
 
             steps.login(browser, wait_time, parametrs.LOGIN, parametrs.PASSWORD)
+
+            try:
+                WebDriverWait(browser, 5).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, consts.SELECTOR_AUTH_ERROR)))
+                print(f"attempt № {t} failed with error: Incorrect email/password")
+                break
+            except TimeoutException:
+                pass
 
             steps.photo_adding(browser, wait_time, [parametrs.FIRST_PHOTO_PATH, parametrs.SECOND_PHOTO_PATH, parametrs.THIRD_PHOTO_PATH])
 
@@ -66,4 +79,4 @@ def sales_scrapper(open_browser=True, save_sale=False, tries=1, wait_time=10):
             print(f'attempt № {t} completed successfully')
             break
 
-sales_scrapper()
+sales_scrapper(tries=3, wait_time=10, save_sale=True)

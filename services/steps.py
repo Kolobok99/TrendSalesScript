@@ -1,5 +1,4 @@
 import time
-
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -30,11 +29,6 @@ def login(browser, wait_time, login, password):
     btn_submit_login = browser.find_element(By.CSS_SELECTOR, consts.SELECTOR_BTN_SUBMIT_LOGIN)
     btn_submit_login.click()
 
-    try:
-        browser.find_element(By.CSS_SELECTOR, consts.SELECTOR_AUTH_ERROR)
-        raise Exception('Incorrect email/password')
-    except Exception:
-        pass
 
 
 
