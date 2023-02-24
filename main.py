@@ -14,6 +14,14 @@ URL = 'https://trendsales.dk/sell'
 
 
 def sales_scrapper(open_browser=True, save_sale=False, tries=1, wait_time=10):
+    """
+    Добавляет товар с параметрами указанными в parametrs.py
+    params:
+            open_browser=True/False - открывать/не открывать бразуер
+            save_sale=True/False - завершать/не завершать добавления товара
+            tries=1 - кол-во попыток
+            wait_time=10 - время ожидания загрузки элементов страницы
+    """
     flag = False
     for t in range(tries):
         try:
